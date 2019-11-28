@@ -15,7 +15,7 @@ type resp struct {
 	val int
 }
 
-func search(numbers []int, find int) (*resp, error) {
+func LinearSearch(numbers []int, find int) (*resp, error) {
 	for index, value := range numbers {
 		if find == value {
 			return &resp{key: index, val: value}, nil
@@ -27,7 +27,7 @@ func search(numbers []int, find int) (*resp, error) {
 func main() {
 	numbers := []int{3, 4, 5, 6, 7, 9, 0, 3, 11, 23}
 	find := 11
-	found, err := search(numbers, find)
+	found, err := LinearSearch(numbers, find)
 	if err != nil {
 		fmt.Println("Not Found")
 	} else {
