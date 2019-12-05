@@ -9,34 +9,35 @@ type ElementNotFoundERROR struct {
 	er string
 }
 
-func (e *ElementNotFoundERROR) Error() string  {
+func (e *ElementNotFoundERROR) Error() string {
 	return e.er
 }
 
-type resp struct {
+/*type resp struct {
 	val int
 }
+*/
+func BinarySearch(numbers []int, find int) int {
 
-func BinarySearch(numbers []int,  find int) (*resp, error)  {
+	low := 0
+	high := len(numbers) - 1
+	mid := int(low + (high-low)/2)
 
-	for _, value := range numbers {
-		low := 0
-		high := len(numbers) - 1
-		mid := low + (high - low) / 2
-
-		if numbers[mid] == find {
-			return &resp{val: numbers[mid]}, nil
+	for low < high {
+		if numbers[mid] > find {
+			high = mid
+		} else if numbers[mid] < find {
+			low = mid
+		} else {
+			return mid
 		}
-
 	}
-	return &resp{val: mid}, nil
+	return -1
 }
-
 
 func main() {
 	numbers := []int{0, 2, 3, 5, 6, 7, 9, 10, 11, 27, 15, 30, 17, 18, 20, 23, 25}
 	sort.Ints(numbers)
-
 	find := 18
 
 	fmt.Println(BinarySearch(numbers, find))
