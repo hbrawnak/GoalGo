@@ -13,32 +13,37 @@ func (e *ElementNotFoundERROR) Error() string {
 	return e.er
 }
 
-/*type resp struct {
+type resp struct {
+	key int
 	val int
 }
-*/
-func BinarySearch(numbers []int, find int) int {
 
-	low := 0
-	high := len(numbers) - 1
-	mid := int(low + (high-low)/2)
+func BinarySearch(numbers []int, find int) (*resp, error) {
+	left := 0
+	right := len(numbers) - 1
 
-	for low < high {
-		if numbers[mid] > find {
-			high = mid
-		} else if numbers[mid] < find {
-			low = mid
+	for left <= right {
+		mid := (left + right) / 2
+		if numbers[mid] == find {
+			return &resp{key: mid, val: numbers[mid]}, nil
+		}
+
+		if numbers[mid] < find {
+			left = mid + 1
 		} else {
-			return mid
+			right = mid - 1
 		}
 	}
-	return -1
+
+	return nil, &ElementNotFoundERROR{er: "Not Found"}
 }
 
 func main() {
 	numbers := []int{0, 2, 3, 5, 6, 7, 9, 10, 11, 27, 15, 30, 17, 18, 20, 23, 25}
 	sort.Ints(numbers)
-	find := 18
+	fmt.Println(numbers)
+	find := 30
 
-	fmt.Println(BinarySearch(numbers, find))
+	res, _ := BinarySearch(numbers, find)
+	fmt.Println(res.key, res.val)
 }
