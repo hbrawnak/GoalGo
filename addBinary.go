@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+// https://leetcode.com/problems/add-binary/description/
+
 func addBinary(a string, b string) string {
 	result := ""
 	carry := 0
